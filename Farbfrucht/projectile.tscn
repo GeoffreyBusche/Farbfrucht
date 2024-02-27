@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://kbhgqlltsoj3"]
+
+[ext_resource type="Script" path="res://projectile.gd" id="1_di0yc"]
+[ext_resource type="Texture2D" uid="uid://cn8l6n72yvtst" path="res://art/projectile.png" id="2_ygcpm"]
+[ext_resource type="AudioStream" uid="uid://ca0mjn3gv48ny" path="res://art/splash_sound.mp3" id="3_tr0k5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jp6o5"]
+radius = 40.0
+
+[node name="Projectile" type="Area2D" groups=["projectiles"]]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_di0yc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("2_ygcpm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jp6o5")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-4.76837e-06, 0)
+scale = Vector2(4, 4)
+
+[node name="ImpactSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tr0k5")
+volume_db = -15.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="finished" from="ImpactSound" to="." method="_on_impact_sound_finished"]

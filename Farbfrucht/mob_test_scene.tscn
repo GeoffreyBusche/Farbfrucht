@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://cn2h0fkcpsdki"]
+
+[ext_resource type="Script" path="res://mob_test_scene.gd" id="1_eoent"]
+[ext_resource type="PackedScene" uid="uid://vvwj55bvl7ta" path="res://mob.tscn" id="1_qyd0r"]
+[ext_resource type="PackedScene" uid="uid://dws7cp4r70j41" path="res://apple_character_rigid.tscn" id="3_khwch"]
+[ext_resource type="PackedScene" uid="uid://wqgf1u5oi3ph" path="res://wiper.tscn" id="4_1kbx4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eqx6n"]
+distance = -1080.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4uwfe"]
+distance = -1920.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uno22"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x0y33"]
+
+[node name="MobTestScene" type="Node2D"]
+script = ExtResource("1_eoent")
+wiper_scene = ExtResource("4_1kbx4")
+
+[node name="Mob1" parent="." instance=ExtResource("1_qyd0r")]
+position = Vector2(787, 306)
+
+[node name="WorldBoundary" type="StaticBody2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary"]
+shape = SubResource("WorldBoundaryShape2D_eqx6n")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBoundary"]
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_4uwfe")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBoundary"]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_uno22")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldBoundary"]
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_x0y33")
+
+[node name="TargetMarker" type="Marker2D" parent="."]
+position = Vector2(426, 538)
+
+[node name="Mob" parent="." instance=ExtResource("1_qyd0r")]
+
+[node name="Mob2" parent="." instance=ExtResource("1_qyd0r")]
+position = Vector2(958, 783)
+
+[node name="AppleCharacterRigid" parent="." instance=ExtResource("3_khwch")]
+position = Vector2(336, 429)
+mass = 5.0

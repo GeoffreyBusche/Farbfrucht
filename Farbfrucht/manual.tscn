@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf8ts0dvj60yy"]
+
+[ext_resource type="Script" path="res://manual.gd" id="1_7uhfh"]
+
+[node name="Manual" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.572549, 0.356863, 0.619608, 1)
+script = ExtResource("1_7uhfh")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 192.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 80
+text = "Anleitung"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Instructions" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 192.0
+offset_right = 1792.0
+offset_bottom = 832.0
+theme_override_font_sizes/font_size = 35
+text = "Bei Kollision mit Projektilen ändert sich deine Farbe. Vermeide deine Komplementärfarbe, sonst wirst du grau und verlierst.
+
+Test: Nur zum Ausprobieren; hier kannst du nicht gewinnen.
+
+Farbjagd: Folge den Anweisungen und färbe dich mithilfe der Projektile passend ein. Erreiche 5 mal dein Ziel, um zu gewinnen! Keine aktive Farbwahl möglich!
+
+Ausdauer: Weiche aus oder passe deine Farbe dem Gegner an, um möglichst lange durchzuhalten. Für besiegte Gegner bekommst du Punkte. Bei 50 Punken gewinnst du!
+
+Bewegung: Linker Analog-Stick/WASD; Farbwahl: Rechter Analog-Stick/Pfeiltasten"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -184.0
+offset_right = 264.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 80
+text = "Menü"
+
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

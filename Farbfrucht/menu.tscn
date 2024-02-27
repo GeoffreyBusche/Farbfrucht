@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3 uid="uid://cibdu0yayb1ht"]
+
+[ext_resource type="Texture2D" uid="uid://brgllyxx15510" path="res://art/apple_scaled_down.png" id="1_8wtu2"]
+[ext_resource type="Script" path="res://menu.gd" id="1_t1s7r"]
+[ext_resource type="Texture2D" uid="uid://dnjica7g4sblc" path="res://art/pear_texture.png" id="2_o68vs"]
+
+[node name="Menu" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.541176, 0.517647, 0.894118, 1)
+script = ExtResource("1_t1s7r")
+
+[node name="Mode0Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 448.0
+offset_right = 576.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 80
+text = "Test"
+
+[node name="Mode1Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 448.0
+offset_right = 1184.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 80
+text = "Farbjagd"
+
+[node name="Mode2Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1344.0
+offset_top = 448.0
+offset_right = 1792.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 80
+text = "Ausdauer"
+
+[node name="ManualButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 672.0
+offset_right = 1184.0
+offset_bottom = 800.0
+theme_override_font_sizes/font_size = 80
+text = "Anleitung"
+
+[node name="EndButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -184.0
+offset_right = 160.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 80
+text = "Ende"
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 64.0
+offset_right = 1472.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 120
+text = "Farbfrucht"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AppleTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 576.0
+offset_right = 640.0
+offset_bottom = 1076.0
+texture = ExtResource("1_8wtu2")
+
+[node name="PearTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1288.0
+offset_top = 576.0
+offset_right = 1788.0
+offset_bottom = 1076.0
+texture = ExtResource("2_o68vs")
+
+[connection signal="pressed" from="Mode0Button" to="." method="_on_mode_0_button_pressed"]
+[connection signal="pressed" from="Mode1Button" to="." method="_on_mode_1_button_pressed"]
+[connection signal="pressed" from="Mode2Button" to="." method="_on_mode_2_button_pressed"]
+[connection signal="pressed" from="ManualButton" to="." method="_on_manual_button_pressed"]
+[connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]

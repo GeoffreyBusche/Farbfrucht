@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dws7cp4r70j41"]
+
+[ext_resource type="Script" path="res://AppleCharacterRigid.gd" id="1_iveme"]
+[ext_resource type="Texture2D" uid="uid://bnsd5610offbx" path="res://art/apple_grayscale.png" id="2_o7fab"]
+[ext_resource type="AudioStream" uid="uid://ca0mjn3gv48ny" path="res://art/splash_sound.mp3" id="3_o88mc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3amlp"]
+radius = 156.0
+height = 390.0
+
+[node name="AppleCharacterRigid" type="RigidBody2D" groups=["damageables"]]
+position = Vector2(960, 540)
+mass = 10.0
+gravity_scale = 0.0
+script = ExtResource("1_iveme")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_o7fab")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 9)
+rotation = 1.5708
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CapsuleShape2D_3amlp")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_o88mc")

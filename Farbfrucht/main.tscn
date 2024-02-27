@@ -1,0 +1,115 @@
+[gd_scene load_steps=20 format=3 uid="uid://gtgo2ppff6a"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_qhoo4"]
+[ext_resource type="PackedScene" uid="uid://kbhgqlltsoj3" path="res://projectile.tscn" id="2_oweny"]
+[ext_resource type="Texture2D" uid="uid://brgllyxx15510" path="res://art/apple_scaled_down.png" id="3_1iwq2"]
+[ext_resource type="PackedScene" uid="uid://vvwj55bvl7ta" path="res://mob.tscn" id="3_y3x3d"]
+[ext_resource type="PackedScene" uid="uid://dws7cp4r70j41" path="res://apple_character_rigid.tscn" id="4_c7fx3"]
+[ext_resource type="Script" path="res://static_body2d.gd" id="4_lihpw"]
+[ext_resource type="PackedScene" uid="uid://wqgf1u5oi3ph" path="res://wiper.tscn" id="4_rjhgn"]
+[ext_resource type="Texture2D" uid="uid://ctqpmhsj0c6ow" path="res://art/background.jpg" id="5_d1k2l"]
+[ext_resource type="PackedScene" uid="uid://d3qnd4ovmx3il" path="res://end_screen.tscn" id="7_5noe5"]
+[ext_resource type="PackedScene" uid="uid://d1bdx0n4ix5ol" path="res://user_interface.tscn" id="7_jwvtt"]
+[ext_resource type="PackedScene" uid="uid://cibdu0yayb1ht" path="res://menu.tscn" id="8_2q2hs"]
+[ext_resource type="AudioStream" uid="uid://cidfj6eqdmlbd" path="res://art/schoen_rosmarin.mp3" id="11_rlt04"]
+[ext_resource type="PackedScene" uid="uid://bf8ts0dvj60yy" path="res://manual.tscn" id="12_dmn7a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3tw7q"]
+radius = 162.0
+height = 390.0
+
+[sub_resource type="Curve2D" id="Curve2D_lgvdc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1921, 1, 0, 0, 0, 0, 1921, 1081, 0, 0, 0, 0, 1, 1081, 0, 0, 0, 0, 1, 1)
+}
+point_count = 5
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5y8bo"]
+distance = -1080.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jg4rb"]
+distance = -1920.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3idhu"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a613g"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_qhoo4")
+projectile_scene = ExtResource("2_oweny")
+mob_scene = ExtResource("3_y3x3d")
+wiper_scene = ExtResource("4_rjhgn")
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("5_d1k2l")
+
+[node name="AppleCharacterRigid" parent="." instance=ExtResource("4_c7fx3")]
+position = Vector2(0, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["obstacles"]]
+script = ExtResource("4_lihpw")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(405, 537)
+texture = ExtResource("3_1iwq2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(407, 554)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3tw7q")
+
+[node name="SpawnPath" type="Path2D" parent="."]
+position = Vector2(-1, -1)
+curve = SubResource("Curve2D_lgvdc")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(1, 1)
+
+[node name="ProjectileTimer" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="UserInterface" parent="." instance=ExtResource("7_jwvtt")]
+
+[node name="EndScreen" parent="." instance=ExtResource("7_5noe5")]
+
+[node name="Menu" parent="." instance=ExtResource("8_2q2hs")]
+
+[node name="WorldBoundary" type="StaticBody2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary"]
+shape = SubResource("WorldBoundaryShape2D_5y8bo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBoundary"]
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_jg4rb")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBoundary"]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_3idhu")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldBoundary"]
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_a613g")
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_rlt04")
+volume_db = -10.0
+
+[node name="Manual" parent="." instance=ExtResource("12_dmn7a")]
+
+[connection signal="downed" from="AppleCharacterRigid" to="." method="down_player"]
+[connection signal="took_damage" from="AppleCharacterRigid" to="." method="player_take_damage"]
+[connection signal="timeout" from="ProjectileTimer" to="." method="_on_projectile_timer_timeout"]
+[connection signal="game_restarted" from="EndScreen" to="." method="_on_end_screen_game_restarted"]
+[connection signal="menu_called" from="EndScreen" to="." method="go_to_menu"]
+[connection signal="manual_button_pressed" from="Menu" to="." method="show_manual"]
+[connection signal="start_button_pressed" from="Menu" to="." method="start_game"]
+[connection signal="timeout" from="MobTimer" to="." method="spawn_mob"]
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]
+[connection signal="menu_called" from="Manual" to="." method="go_to_menu"]

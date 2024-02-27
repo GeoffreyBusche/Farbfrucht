@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://vvwj55bvl7ta"]
+
+[ext_resource type="Script" path="res://mob.gd" id="1_32wb8"]
+[ext_resource type="Texture2D" uid="uid://cxtcw5l5y0im6" path="res://art/pear_texture_grayscale.png" id="3_170xr"]
+[ext_resource type="PackedScene" uid="uid://kbhgqlltsoj3" path="res://projectile.tscn" id="3_mdc0p"]
+[ext_resource type="AudioStream" uid="uid://b3io3xdvo86lf" path="res://art/cannon_sound.mp3" id="4_e8uve"]
+
+[node name="Mob" type="RigidBody2D" groups=["damageables", "mobs"]]
+position = Vector2(792, 473)
+gravity_scale = 0.0
+max_contacts_reported = 10
+contact_monitor = true
+script = ExtResource("1_32wb8")
+projectile_scene = ExtResource("3_mdc0p")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_170xr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.3, 0.3)
+polygon = PackedVector2Array(-26, -131, 24, -110, 72, -2, 129, 58, 142, 147, 92, 209, -9, 233, -94, 212, -139, 160, -138, 87, -105, 25, -101, -41, -78, -106)
+
+[node name="ShotTimer" type="Timer" parent="."]
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_e8uve")
+volume_db = -20.0
+pitch_scale = 2.0
+
+[connection signal="timeout" from="ShotTimer" to="." method="shoot_animated"]

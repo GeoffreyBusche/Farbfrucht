@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3qnd4ovmx3il"]
+
+[ext_resource type="Script" path="res://end_screen.gd" id="1_n1dye"]
+[ext_resource type="Texture2D" uid="uid://n27sjafb43xa" path="res://art/eaten_apple.png" id="2_e0qtb"]
+[ext_resource type="Texture2D" uid="uid://brgllyxx15510" path="res://art/apple_scaled_down.png" id="3_31fkj"]
+[ext_resource type="AudioStream" uid="uid://dyjh0c4pebsn7" path="res://art/crunch_sound.mp3" id="4_uj6f7"]
+[ext_resource type="AudioStream" uid="uid://dgjftirqpne6y" path="res://art/victory_sound.mp3" id="5_4w7fg"]
+
+[node name="EndScreen" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.423529)
+script = ExtResource("1_n1dye")
+
+[node name="AgainButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 832.0
+offset_right = 704.0
+offset_bottom = 960.0
+theme_override_font_sizes/font_size = 80
+text = "Nochmal!"
+
+[node name="ToMenuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1216.0
+offset_top = 832.0
+offset_right = 1599.0
+offset_bottom = 960.0
+theme_override_font_sizes/font_size = 80
+text = "Menü"
+
+[node name="GameOverLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 192.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/bold_font_size = 80
+theme_override_font_sizes/italics_font_size = 80
+theme_override_font_sizes/bold_italics_font_size = 80
+theme_override_font_sizes/mono_font_size = 80
+bbcode_enabled = true
+text = "[center][i]Gewonnen![/i][/center]"
+
+[node name="GameModeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 256.0
+offset_right = 1344.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 60
+text = "Spielmodus:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 448.0
+offset_right = 832.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 60
+text = "Punktzahl:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 448.0
+offset_right = 1599.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 60
+text = "Zeit:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LossTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 805.0
+offset_top = 442.0
+offset_right = 1209.0
+offset_bottom = 1042.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_e0qtb")
+
+[node name="WinTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 719.0
+offset_top = 455.0
+offset_right = 1219.0
+offset_bottom = 955.0
+texture = ExtResource("3_31fkj")
+
+[node name="LossSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_uj6f7")
+volume_db = 10.0
+
+[node name="WinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4w7fg")
+
+[connection signal="pressed" from="AgainButton" to="." method="_on_again_button_pressed"]
+[connection signal="pressed" from="ToMenuButton" to="." method="_on_to_menu_button_pressed"]
