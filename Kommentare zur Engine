@@ -1,3 +1,4 @@
 Entwickelt in Godot 4.2., 64 bit Windows. Download und Tutorials auf https://godotengine.org/download/windows/. 
-Zum Ausprobieren, installiere erst die Engine, dann lade den kompletten Dateiordner herunter. Einzeldateien funktionieren wahrscheinlich nicht ohne Kontext.
+Zum Ausprobieren, nutze die .exe im build-ordner (.pck-datei muss im selben ordner liegen).
+Zur Codebearbeitung, installiere erst die Engine, dann lade den kompletten Dateiordner herunter. Einzeldateien funktionieren wahrscheinlich nicht ohne Kontext.
 Die verwendeten Bilder und Audiodateien sind möglicherweise urheberrechtlich geschützt.
